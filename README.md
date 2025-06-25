@@ -32,7 +32,7 @@ Output images in `ReAttAMT/sample_real_train`, `ReAttAMT/sample_fake_train`, `Re
 Attention maps in `ReAttAMT/runs`.
 
 ## Acknowledge
-Some of the codes are built upon [DiffAM](https://github.com/HansSunY/DiffAM) and [diffusionCLIP](https://github.com/gwang-kim/DiffusionCLIP)
+Some of the codes are built upon [DiffAM](https://github.com/HansSunY/DiffAM) and [DiffusionCLIP](https://github.com/gwang-kim/DiffusionCLIP)
 ## Citation
 ```
 TBD
