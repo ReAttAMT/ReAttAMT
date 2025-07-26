@@ -27,6 +27,8 @@ python main.py --makeup_transfer --config celeba.yml --exp ./runs/test --n_train
 
 The makeup text prompt can be customized in `main.py` or by `--src_txt 'xxx'` `--trg_txt 'xxx'`.
 
+Untargeted(Dodging) attack can be implemented by `--un_adv_loss_w = 0.4`.
+
 Output images in `ReAttAMT/sample_real_train`, `ReAttAMT/sample_fake_train`, `ReAttAMT/sample_real_test`, `ReAttAMT/sample_fake_test`, `ReAttAMT/sample_real_train`, `ReAttAMT/sample_fake_train`, `ReAttAMT/sample_real_test`, `ReAttAMT/sample_fake_test`.
 
 Attention maps in `ReAttAMT/runs`.
