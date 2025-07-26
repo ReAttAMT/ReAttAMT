@@ -275,7 +275,7 @@ class AttentionAM(object):
                     retain_loss_list = []
                     for model_name in list(self.model_list.keys())[:-1]:
                         print(f"********************* model：{model_name} ***********************")
-                        untarget_loss_A, target_loss_A, mr_loss_A, retain_loss_A = cal_adv_loss(x, self.target_image, x_r, model_name, self.model_list)
+                        untarget_loss_A, target_loss_A, mr_loss_A, retain_loss_A = cal_adv_loss(x0, x, self.target_image, x_r, model_name, self.model_list)
                         targeted_loss_list.append(target_loss_A)
 		        untarget_loss_list.append(untarget_loss_A)
                         mr_loss_list.append(mr_loss_A)
