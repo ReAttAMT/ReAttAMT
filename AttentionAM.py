@@ -249,13 +249,12 @@ class AttentionAM(object):
 
                     #clip loss
                     loss_clip = -torch.log((2 - clip_loss_func(x0, self.src_txt, x, self.trg_txt)) / 2)
-                    #id loss
+			#id loss
                     x0 = x0.to(self.device)
                     x = x.to(self.device)
                     loss_l1 = nn.L1Loss()(x0, x)
                     loss_lpips = loss_fn_alex(x0, x)
-
-		            #remove makeup
+			#remove makeup
                     x_r = x.clone()
                     x_r = model_makeup_removal.remove(model_mr, x_r)
                     print("removed")
@@ -276,13 +275,15 @@ class AttentionAM(object):
                     retain_loss_list = []
                     for model_name in list(self.model_list.keys())[:-1]:
                         print(f"********************* model：{model_name} ***********************")
-                        target_loss_A, mr_loss_A, retain_loss_A = cal_adv_loss(x, self.target_image, x_r, model_name, self.model_list)
+                        untarget_loss_A, target_loss_A, mr_loss_A, retain_loss_A = cal_adv_loss(x, self.target_image, x_r, model_name, self.model_list)
                         targeted_loss_list.append(target_loss_A)
+		        untarget_loss_list.append(untarget_loss_A)
                         mr_loss_list.append(mr_loss_A)
                         retain_loss_list.append(retain_loss_A)
                     loss_adv = torch.mean(torch.stack(targeted_loss_list)) 
                     loss_mr_adv = torch.mean(torch.stack(mr_loss_list))
                     loss_retain_adv = torch.mean(torch.stack(retain_loss_list))
+		    loss_un_adv = torch.mean(torch.stack(untarget_loss_A))
 
                     # local loss
                     local_loss_list = []
@@ -312,6 +313,7 @@ class AttentionAM(object):
                                 self.args.lpips_loss_w * loss_lpips +
                                 self.args.l1_loss_w * loss_l1 +
                                 self.args.adv_loss_w * loss_adv 
+				+ self.args.un_adv_loss_w * loss_un_adv
                                 + self.args.local_loss_w * loss_local
 				                + self.args.loss_mr_adv_w * loss_mr_adv
                                 + self.args.loss_retain_adv_w * loss_retain_adv
