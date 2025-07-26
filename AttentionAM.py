@@ -283,7 +283,7 @@ class AttentionAM(object):
                     loss_adv = torch.mean(torch.stack(targeted_loss_list)) 
                     loss_mr_adv = torch.mean(torch.stack(mr_loss_list))
                     loss_retain_adv = torch.mean(torch.stack(retain_loss_list))
-		    loss_un_adv = torch.mean(torch.stack(untarget_loss_A))
+		    loss_un_adv = torch.mean(torch.stack(untarget_loss_list))
 
                     # local loss
                     local_loss_list = []
